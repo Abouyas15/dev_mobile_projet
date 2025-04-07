@@ -1,0 +1,6 @@
+// Avant de vous connecter à Google et de vous authentifier sur votre téléphone, vous devez ajouter les clés SHA1 et SHA256 à votre Firebase.
+
+// keytool -list -v -keystore ~/.android/debug.keystore -alias androiddebugkey -storepass android -keypass android
+// Pour vous connecter à Google, vous devez l'activer dans Firebase.
+// Après avoir remplacé les nouveaux services Google, vous êtes prêt à démarrer.
+// Passons maintenant au codage.

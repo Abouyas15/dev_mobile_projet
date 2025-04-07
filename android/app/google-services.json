@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "200838064107",
+    "project_id": "ibamedt-4bcb6",
+    "storage_bucket": "ibamedt-4bcb6.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:200838064107:android:a6e43896897448c8ee5bae",
+        "android_client_info": {
+          "package_name": "com.example.ibamedt"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "200838064107-2t1d892tmbcb6tuv01bju5fh8j2r5qif.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ibamedt",
+            "certificate_hash": "d1891d83dfa69bbb8b8161c7600c0a4b4d747357"
+          }
+        },
+        {
+          "client_id": "200838064107-ueppnidvsj2dhlkbc5e9id97ij0gn6mi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCERWiNVgKtZupyw7dEPr5T1wjOyeIYuyM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "200838064107-ueppnidvsj2dhlkbc5e9id97ij0gn6mi.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "200838064107-c62iau9qfm79u77ahkmjlk41j5fuiurj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.ibamedt"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
