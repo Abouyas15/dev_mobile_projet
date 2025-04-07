@@ -1,11 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ibamedt/Login%20Signup/Widget/button.dart';
+import '../../Screen/Acceuil.dart';
 import '../Services/authentication.dart';
 import '../Widget/snackbar.dart';
 import '../Widget/text_field.dart';
 import 'connexion.dart';
-import 'package:ibamedt/Screen/Acceuil.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
 class SignupScreen extends StatefulWidget {
@@ -206,7 +206,9 @@ class _SignupScreenState extends State<SignupScreen>
     Future.delayed(const Duration(milliseconds: 2000), () {
       Navigator.of(context).pop();
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const HomeScreen()),
+        MaterialPageRoute(
+          builder: (context) => const HomeScreen(initialIndex: 0),
+        ),
       );
     });
   }

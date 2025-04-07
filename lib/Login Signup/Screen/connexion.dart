@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:math' show sin;
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:ibamedt/Screen/Acceuil.dart';
 import 'package:ibamedt/Login%20With%20Google/google_auth.dart';
+import 'package:ibamedt/Screen/Acceuil.dart';
 import 'package:ibamedt/Screen/edt.dart';
 import '../Services/authentication.dart';
 import '../Widget/snackbar.dart';
@@ -163,7 +163,9 @@ class _LoginScreenState extends State<LoginScreen>
     Future.delayed(const Duration(milliseconds: 2000), () {
       Navigator.of(context).pop();
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const EDTScreen()),
+        MaterialPageRoute(
+          builder: (context) => const HomeScreen(initialIndex: 3),
+        ),
       );
     });
   }

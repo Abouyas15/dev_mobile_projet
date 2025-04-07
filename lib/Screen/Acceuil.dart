@@ -1,61 +1,91 @@
 import 'package:flutter/cupertino.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:ibamedt/Screen/profile.dart';
+import 'package:ibamedt/Screen/settings.dart';
+import 'package:provider/provider.dart';
+import '../Provider/navigation_provider.dart';
+import 'edt.dart';
+import 'notifications.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class HomeScreen extends StatefulWidget {
+  final int initialIndex;
+  const HomeScreen({super.key, required this.initialIndex});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    super.initState();
+    _currentIndex = widget.initialIndex;
+    // Mettre à jour le provider
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) {
+        Provider.of<NavigationProvider>(
+          context,
+          listen: false,
+        ).setIndex(_currentIndex);
+      }
+    });
+  }
+
+  late int _currentIndex;
+
+  final List<Widget> _pages = [
+    const EDTScreen(),
+    const NotificationsScreen(),
+    const ProfileScreen(),
+    const SettingsScreen(),
+  ];
+
+  final List<String> _titles = ['EDT', 'Notifications', 'Profil', 'Paramètres'];
 
   @override
   Widget build(BuildContext context) {
-    User? user = FirebaseAuth.instance.currentUser;
-
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            width: 100,
-            height: 100,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: CupertinoColors.systemGrey4,
-              image:
-                  user != null && user.photoURL != null
-                      ? DecorationImage(
-                        image: NetworkImage(user.photoURL!),
-                        fit: BoxFit.cover,
-                      )
-                      : null,
-            ),
-            child:
-                user?.photoURL == null
-                    ? const Icon(
-                      CupertinoIcons.person_solid,
-                      size: 50,
-                      color: CupertinoColors.white,
-                    )
-                    : null,
+    return CupertinoTabScaffold(
+      tabBar: CupertinoTabBar(
+        currentIndex: _currentIndex,
+        onTap: (index) {
+          setState(() {
+            _currentIndex = index;
+            Provider.of<NavigationProvider>(
+              context,
+              listen: false,
+            ).setIndex(index);
+          });
+        },
+        activeColor: CupertinoColors.activeBlue,
+        inactiveColor: CupertinoColors.systemGrey,
+        items: const [
+          // BottomNavigationBarItem(
+          //   icon: Icon(CupertinoIcons.home),
+          //   label: 'Accueil',
+          // ),
+          BottomNavigationBarItem(
+            icon: Icon(CupertinoIcons.calendar),
+            label: 'EDT',
           ),
-          const SizedBox(height: 10),
-          Text(
-            user != null
-                ? "Félicitations\nBienvenue ${user.displayName ?? 'Utilisateur'}"
-                : "Utilisateur non connecté",
-            textAlign: TextAlign.center,
-            style: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+          BottomNavigationBarItem(
+            icon: Icon(CupertinoIcons.bell),
+            label: 'Notifications',
           ),
-          const SizedBox(height: 20),
-          CupertinoButton(
-            color: CupertinoColors.activeBlue,
-            onPressed: () async {
-              await FirebaseAuth.instance.signOut();
-              if (context.mounted) {
-                Navigator.of(context).pushReplacementNamed('/login');
-              }
-            },
-            child: const Text("Se déconnecter"),
+          BottomNavigationBarItem(
+            icon: Icon(CupertinoIcons.person),
+            label: 'Profil',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(CupertinoIcons.settings),
+            label: 'Paramètres',
           ),
         ],
       ),
+      tabBuilder: (BuildContext context, int index) {
+        return CupertinoPageScaffold(
+          navigationBar: CupertinoNavigationBar(middle: Text(_titles[index])),
+          child: SafeArea(child: _pages[index]),
+        );
+      },
     );
   }
 }
